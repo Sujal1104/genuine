@@ -66,18 +66,20 @@ This applies to both **System Variables** and **User Variables**.
 | **SuiteXML Files** | Located in the `build` folder |
 | **Driver Source Files** | Mac/Windows drivers in the `drivers` folder |
 
-### 📱 Mobile Automation (Windows)
+### 📱 Mobile Automation (Android & iOS)
 
 #### 🔹 Prerequisites
 To set up and run mobile automation, ensure you have the following installed:
 - **Appium** (Server) - For executing mobile tests and viewing logs.
 - **Android Studio** - Required for running and managing virtual and physical Android devices.
+- **Xcode** (for iOS) - Required for iOS testing.
 - **ADB (Android Debug Bridge)** - To check if devices are connected.
 - **Node.js & npm** - Required for installing Appium.
 - **Appium Inspector** - To inspect UI elements of mobile applications.
-- **APK File** - Example: `Genuin_SDK_1.1.13_42.apk`
+- **APK/IPA File** - Example: `Genuin_SDK_1.1.13_42.apk` (Android) or `Genuin_SDK_1.1.13_42.ipa` (iOS)
 
 #### 🔹 Setup Steps
+##### For Android:
 1. Install **Appium** by following the [Appium Installation Guide](https://github.com/appium/appium).
 2. Set up **Android Studio** and configure SDK & AVD Manager.
 3. Install **ADB** and verify the installation by running:
@@ -88,9 +90,23 @@ To set up and run mobile automation, ensure you have the following installed:
 4. Install **Appium Inspector** to inspect UI elements.
 5. Configure **Environment Variables** for Appium, ADB, and Node.js.
 
+##### For iOS:
+1. Install **Xcode** from the Mac App Store.
+2. Install **CocoaPods** by running:
+   ```sh
+   sudo gem install cocoapods
+   ```
+3. Install **Appium** and **Appium Inspector**.
+4. Set up **WebDriverAgent** for iOS device automation.
+5. Verify connected iOS devices by running:
+   ```sh
+   idevice_id -l
+   ```
+
 ![Mobile Automation Setup](https://github.com/user-attachments/assets/799a633c-fadf-4d3c-89b0-47aabf2ec7af)
 
 #### 🔹 Running Mobile Automation Tests
+##### For Android:
 1. Connect your Android device and verify its connection using:
    ```sh
    adb devices
@@ -109,7 +125,25 @@ To set up and run mobile automation, ensure you have the following installed:
 5. If using **Appium Server GUI**, configure the Java and Android paths, then start the server.
 6. Ensure no other Appium servers are running before execution.
 
-> **Note:** If you want to view logs, use the **Appium Server GUI**. Set up the Java and Android SDK paths, then start the server. You can access the configuration by clicking **Edit Configuration** in the Appium GUI.
+##### For iOS:
+1. Connect the iOS device and verify it using:
+   ```sh
+   idevice_id -l
+   ```
+2. Start the **Appium Server**:
+   ```sh
+   appium
+   ```
+3. Run tests in IntelliJ using:
+   ```sh
+   mvn clean
+   mvn test
+   mvn integration-test
+   ```
+4. Verify the app behavior using **Appium Inspector**.
+5. Ensure Xcode and WebDriverAgent are configured correctly before running tests.
+
+> **Note:** If you want to view logs, use the **Appium Server GUI**. Set up the Java, Android, and iOS paths, then start the server. You can access the configuration by clicking **Edit Configuration** in the Appium GUI.
 
 ![Appium Server Configuration](https://github.com/user-attachments/assets/c65fef61-5b2a-4c0e-beed-16cf55efdf3e)
 
